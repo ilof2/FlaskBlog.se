@@ -1,8 +1,12 @@
 from flask import Flask
 from config import Configuration
+from flask_sqlalchemy import SQLAlchemy
 
-import view
-
+from posts.blueprint import posts
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
+
+app.register_blueprint(posts, url_prefix='/blog')
+
+
