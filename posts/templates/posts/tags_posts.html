@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ tag.name }} posts
+{% endblock %}
+
+
+
+{% block content_title %}
+	Posts for tag "{{ tag.name }}":
+{% endblock %}
+
+
+{% block content %}
+<ul class="list-group">
+	{% for post in posts %}
+	<li class="list-group-item">
+		<a href="{{ url_for('posts.post_datails', slug = post.slug) }}">{{ post.title }}</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

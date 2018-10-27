@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+	{{ post.title }}
+{% endblock %}
+
+<div class="d-flex justify-content-center flex-fill">
+	{% block content %}
+			<div class="card text-white bg-dark mb-3" style="max-width: 55rem;">
+				<div class="card-body">
+					<h5 class="card-title text-center">{{ post.title }}</h5>
+					{% for tag in tags %}
+						<a href="{{ url_for('posts.tag_datails', slug = tag.slug) }}">
+							<span class="badge badge-success">{{ tag.name }}</span>
+						</a>
+					{% endfor %}
+					<p class="card-text">{{ post.body }}</p>
+				</div>
+			</div>
+	{% endblock %}
+</div>

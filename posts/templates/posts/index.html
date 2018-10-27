@@ -6,9 +6,15 @@
 
 
 {% block content_title %}
-	Blueprint index page
+	All Posts:
 {% endblock %}
 
 {% block content %}
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, tempore!
+		<div class="card" style="width: 18rem;">
+			<ul class="list-group list-group-flush">
+				{% for post in posts %}
+					<li class="list-group-item"><a href="{{url_for('posts.post_datails', slug = post.slug)}}">{{ post.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
 {% endblock %}
