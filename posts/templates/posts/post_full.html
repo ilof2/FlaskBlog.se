@@ -19,5 +19,6 @@
 					<p class="card-text">{{ post.body }}</p>
 				</div>
 			</div>
+		<a href="{{ url_for('posts.edit_post', slug = post.slug) }}">Edit post</a>
 	{% endblock %}
 </div>

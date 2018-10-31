@@ -15,13 +15,13 @@
 {% block content %}
 	
 <div class="col-md-6">
-	<form action="{{ url_for('posts.edit_post', slug = post.slug) }}" method = 'Post'>
+	<form action="{{ url_for('posts.edit_post', slug = post.slug) }}" method = 'POST'>
 		
-		{% for fi in form %}
+		{% for field in form %}
 			
 			<div class="form-group">
-				{{ fi.label(class ='control-label') }}
-				{{ fi(class='form-control') }}
+				{{ field.label(class ='control-label') }}
+				{{ field(class='form-control') }}
 			</div>
 
 		{% endfor %}
