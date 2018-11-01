@@ -1,4 +1,4 @@
-from flask import Flask
+wtfrom flask import Flask
 from config import Configuration
 from flask_sqlalchemy import SQLAlchemy
 
