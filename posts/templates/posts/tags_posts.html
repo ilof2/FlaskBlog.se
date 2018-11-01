@@ -15,7 +15,7 @@
 <ul class="list-group">
 	{% for post in posts %}
 	<li class="list-group-item">
-		<a href="{{ url_for('posts.post_datails', slug = post.slug) }}">{{ post.title }}</a>
+		<a href="{{ url_for('posts.post_details', slug = post.slug) }}">{{ post.title }}</a>
 	</li>
 	{% endfor %}
 </ul>
