@@ -2,16 +2,19 @@ from flask import Blueprint, request
 from flask import render_template, redirect, url_for
 
 from models import Post, Tag
-from .forms import PostForm
+from .forms import PostForm, PostForm
 
 from app import db
 
+from flask_security import login_required
 
 posts = Blueprint('posts', __name__, template_folder = 'templates')
 
 
 # /blog/create
+
 @posts.route('/create', methods = ['POST', 'GET'])
+@login_required
 def create_post():
 
 	if request.method == 'POST':
@@ -38,10 +41,11 @@ def create_post():
 
 # /blog/post-slug/edit
 @posts.route('/<slug>/edit', methods=['POST', 'GET'])
+@login_required
 def edit_post(slug):
 	post = Post.query.filter(Post.slug==slug).first()
 	if request.method == 'POST':
-		form = PostForm(formdata=request.form, obj=post)
+		form = EditPostForm(formdata=request.form, obj=post)
 		form.populate_obj(post)
 		db.session.commit()
 
