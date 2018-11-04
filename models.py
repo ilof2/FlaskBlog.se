@@ -8,7 +8,7 @@ import re
 
 def slugify(title):
 	pattern = r'[^\w+]'
-	return re.sub(pattern, '-', title.lower())
+	return re.sub(pattern, '-', title)
 
 
 post_tags = db.Table(

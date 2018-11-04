@@ -1,6 +1,6 @@
 #! ../venv/bin/python3
 
-from app import app, db
+from app import app
 import view
 from posts.blueprint import posts
 

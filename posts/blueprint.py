@@ -20,14 +20,10 @@ def create_post():
 	if request.method == 'POST':
 		title = request.form['title']
 		body = request.form['body']
-		tags = request.form['tags']
 
 		try:
-			tag = Tag(name = tags)
 			post = Post(title = title, body = body)
-			post.tags.append(tag)
 			db.session.add(post)
-			db.session.add(tag)
 			db.session.commit()
 		except:
 			print('Error!!!!')
@@ -39,20 +35,20 @@ def create_post():
 	return render_template('posts/create_post.html', form = form)
 
 
-# /blog/post-slug/edit
-@posts.route('/<slug>/edit', methods=['POST', 'GET'])
-@login_required
-def edit_post(slug):
-	post = Post.query.filter(Post.slug==slug).first()
-	if request.method == 'POST':
-		form = EditPostForm(formdata=request.form, obj=post)
-		form.populate_obj(post)
-		db.session.commit()
 
-		return redirect(url_for('posts.post_details', slug = post.slug))
+# @posts.route('/<slug>/edit', methods=['POST', 'GET'])
+# @login_required
+# def edit_post(slug):
+# 	post = Post.query.filter(Post.slug==slug).first_or_404()
+# 	if request.method == 'POST':
+# 		form = EditPostForm(formdata=request.form, obj=post)
+# 		form.populate_obj(post)
+# 		db.session.commit()
 
-	form = PostForm(obj = post)
-	return render_template('posts/edit_post.html', post=post, form = form)
+# 		return redirect(url_for('posts.post_details', slug = post.slug))
+
+# 	form = PostForm(obj = post)
+# 	return render_template('posts/edit_post.html', post=post, form = form)
 
 
 
@@ -82,13 +78,13 @@ def index():
 # /blog/post-name
 @posts.route('/<slug>')
 def post_details(slug):
-	post = Post.query.filter(Post.slug == slug).first()
+	post = Post.query.filter(Post.slug == slug).first_or_404()
 	tags = post.tags
 	return render_template('posts/post_full.html', post = post, tags = tags)
 
 # /blog/tag/tag-slug
 @posts.route('/tag/<slug>')
 def tag_datails(slug):
-	tag = Tag.query.filter(Tag.slug == slug).first()
+	tag = Tag.query.filter(Tag.slug == slug).first_or_404()
 	posts = tag.posts.all()
 	return render_template('posts/tags_posts.html', tag = tag, posts = posts)

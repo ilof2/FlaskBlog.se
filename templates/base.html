@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}-Blog</title>
+    <title>{% block title %}{% endblock %}| Blog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -22,7 +22,12 @@
                     <a class="nav-link" href = "{{ url_for('about') }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class = "nav-link" href="{{ url_for('posts.create_post') }}">+Create new</a>
+                    <!-- <a class = "nav-link" href="{{ url_for('posts.create_post') }}">+Create new</a> -->
+                    <li class="nav-item">
+                        {% if current_user.has_role('admin') %}
+                            <a href="/admin" class = "nav-link">Admin</a>
+                        {% endif %}
+                    </li>
                 </li>
             </ul>
 
